@@ -1,0 +1,7 @@
+export { default as investigations } from './investigations.json'
+export { default as scenarioA } from './scenarios/scenario-a.json'
+export { default as scenarioB } from './scenarios/scenario-b.json'
+export { default as integrations } from './integrations.json'
+export { default as memories } from './memories.json'
+export { default as postmortemTemplate } from './postmortem-template.json'
+export { default as analytics } from './analytics.json'

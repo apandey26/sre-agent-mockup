@@ -1,0 +1,38 @@
+{
+  "integrations": [
+    { "id": "pagerduty", "name": "PagerDuty", "tier": 1, "tierName": "Incident Management", "icon": "Bell", "status": "connected", "pulls": "On-call schedule, escalation policy, incident timeline", "pushes": "Create incident, escalate, resolve", "lastSync": "2 min ago", "dataStats": "47 incidents synced" },
+    { "id": "servicenow", "name": "ServiceNow", "tier": 1, "tierName": "Incident Management", "icon": "Ticket", "status": "connected", "pulls": "CMDB, change records, incident records", "pushes": "Create incident, update CI", "lastSync": "5 min ago", "dataStats": "1,203 CIs mapped" },
+    { "id": "opsgenie", "name": "Opsgenie", "tier": 1, "tierName": "Incident Management", "icon": "AlertCircle", "status": "disconnected", "pulls": "On-call, alert history", "pushes": "Create alert, escalate", "lastSync": null, "dataStats": null },
+    { "id": "slack", "name": "Slack", "tier": 2, "tierName": "Communication", "icon": "MessageSquare", "status": "connected", "pulls": "Incident channel messages, thread context", "pushes": "Post summary, create channel, thread reply", "lastSync": "30 sec ago", "dataStats": "14 channels monitored" },
+    { "id": "teams", "name": "Microsoft Teams", "tier": 2, "tierName": "Communication", "icon": "Users", "status": "disconnected", "pulls": "Channel messages, thread context", "pushes": "Post summary, create channel", "lastSync": null, "dataStats": null },
+    { "id": "zoom", "name": "Zoom", "tier": 2, "tierName": "Communication", "icon": "Video", "status": "connected", "pulls": "Meeting transcripts, participants, action items", "pushes": "Create meeting, invite participants", "lastSync": "1 hour ago", "dataStats": "3 war room transcripts" },
+    { "id": "google-meet", "name": "Google Meet", "tier": 2, "tierName": "Communication", "icon": "Video", "status": "disconnected", "pulls": "Meeting transcripts, participants", "pushes": "Create meeting link", "lastSync": null, "dataStats": null },
+    { "id": "github", "name": "GitHub", "tier": 3, "tierName": "Code & Deploy", "icon": "GitBranch", "status": "connected", "pulls": "Commits, PR diffs, deploy timestamps, CODEOWNERS", "pushes": "Create issue", "lastSync": "1 min ago", "dataStats": "12 repos linked" },
+    { "id": "gitlab", "name": "GitLab", "tier": 3, "tierName": "Code & Deploy", "icon": "GitBranch", "status": "disconnected", "pulls": "Commits, MR diffs, pipelines", "pushes": "Create issue", "lastSync": null, "dataStats": null },
+    { "id": "bitbucket", "name": "Bitbucket", "tier": 3, "tierName": "Code & Deploy", "icon": "GitBranch", "status": "disconnected", "pulls": "Commits, PR diffs, pipelines", "pushes": "Create issue", "lastSync": null, "dataStats": null },
+    { "id": "argocd", "name": "ArgoCD", "tier": 3, "tierName": "Code & Deploy", "icon": "RefreshCw", "status": "connected", "pulls": "Deployment status, rollback history, sync status", "pushes": "Trigger rollback", "lastSync": "3 min ago", "dataStats": "8 apps synced" },
+    { "id": "confluence", "name": "Confluence", "tier": 4, "tierName": "Knowledge", "icon": "BookOpen", "status": "connected", "pulls": "Runbooks, architecture docs, post-mortems", "pushes": "Create/update post-mortem page", "lastSync": "15 min ago", "dataStats": "23 runbooks indexed" },
+    { "id": "notion", "name": "Notion", "tier": 4, "tierName": "Knowledge", "icon": "FileText", "status": "disconnected", "pulls": "Runbooks, docs", "pushes": "Create page", "lastSync": null, "dataStats": null },
+    { "id": "jira", "name": "Jira", "tier": 4, "tierName": "Knowledge", "icon": "CheckSquare", "status": "connected", "pulls": "Related tickets, sprint context, known bugs", "pushes": "Create ticket, update status", "lastSync": "4 min ago", "dataStats": "156 tickets linked" },
+    { "id": "linear", "name": "Linear", "tier": 4, "tierName": "Knowledge", "icon": "Layers", "status": "disconnected", "pulls": "Issues, cycles, projects", "pushes": "Create issue", "lastSync": null, "dataStats": null },
+    { "id": "aws", "name": "AWS DevOps Agent", "tier": 5, "tierName": "Cloud Provider Agents", "icon": "Cloud", "status": "connected", "pulls": "Infrastructure analysis, CloudFormation state", "pushes": "Scale services, restart tasks", "lastSync": "NR-managed", "dataStats": "Platform integration" },
+    { "id": "azure", "name": "Azure SRE Agent", "tier": 5, "tierName": "Cloud Provider Agents", "icon": "Cloud", "status": "disconnected", "pulls": "Azure resource health, deployment status", "pushes": "Scale VMSS, restart App Service", "lastSync": null, "dataStats": null },
+    { "id": "gcp", "name": "GCP Cloud Agent", "tier": 5, "tierName": "Cloud Provider Agents", "icon": "Cloud", "status": "disconnected", "pulls": "GCP resource status, Cloud Run state", "pushes": "Scale instances", "lastSync": null, "dataStats": null },
+    { "id": "grafana", "name": "Grafana", "tier": 6, "tierName": "Observability", "icon": "BarChart3", "status": "disconnected", "pulls": "Dashboard snapshots, alert history", "pushes": null, "lastSync": null, "dataStats": null },
+    { "id": "splunk", "name": "Splunk", "tier": 6, "tierName": "Observability", "icon": "Database", "status": "disconnected", "pulls": "Log search results, saved searches", "pushes": null, "lastSync": null, "dataStats": null },
+    { "id": "datadog", "name": "Datadog", "tier": 6, "tierName": "Observability", "icon": "BarChart3", "status": "disconnected", "pulls": "Metric snapshots", "pushes": null, "lastSync": null, "dataStats": null },
+    { "id": "sentry", "name": "Sentry", "tier": 6, "tierName": "Observability", "icon": "Bug", "status": "connected", "pulls": "Error groups, stack traces, release tracking", "pushes": null, "lastSync": "10 min ago", "dataStats": "4 projects linked" }
+  ],
+  "health": {
+    "connectedCount": 10,
+    "totalCount": 22,
+    "errorRate": "0.3%",
+    "topUsed": [
+      { "name": "PagerDuty", "usagePercent": 92 },
+      { "name": "Slack", "usagePercent": 87 },
+      { "name": "GitHub", "usagePercent": 78 },
+      { "name": "ServiceNow", "usagePercent": 45 },
+      { "name": "Confluence", "usagePercent": 34 }
+    ]
+  }
+}

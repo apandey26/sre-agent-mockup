@@ -1,0 +1,66 @@
+{
+  "topMetrics": {
+    "totalInvestigationsMonth": 34,
+    "mttrMinutes": 22,
+    "autoResolvedPercent": 24,
+    "hypothesisAccuracy": 78,
+    "memoryReuseRate": 34
+  },
+  "investigationsOverTime": [
+    { "week": "Mar 10", "p1": 1, "p2": 3, "p3": 4, "auto": 2 },
+    { "week": "Mar 17", "p1": 0, "p2": 2, "p3": 5, "auto": 3 },
+    { "week": "Mar 24", "p1": 2, "p2": 4, "p3": 3, "auto": 1 },
+    { "week": "Mar 31", "p1": 1, "p2": 2, "p3": 6, "auto": 4 },
+    { "week": "Apr 7", "p1": 2, "p2": 3, "p3": 3, "auto": 2 }
+  ],
+  "mttrTrend": [
+    { "week": "Feb 24", "mttr": 38 },
+    { "week": "Mar 3", "mttr": 34 },
+    { "week": "Mar 10", "mttr": 31 },
+    { "week": "Mar 17", "mttr": 28 },
+    { "week": "Mar 24", "mttr": 26 },
+    { "week": "Mar 31", "mttr": 24 },
+    { "week": "Apr 7", "mttr": 22 },
+    { "week": "Apr 14", "mttr": 20 }
+  ],
+  "topEntities": [
+    { "entity": "checkout-service", "count": 8 },
+    { "entity": "api-gateway", "count": 6 },
+    { "entity": "payment-gateway", "count": 5 },
+    { "entity": "search-service", "count": 4 },
+    { "entity": "inventory-service", "count": 3 },
+    { "entity": "user-service", "count": 3 },
+    { "entity": "redis-cache", "count": 2 },
+    { "entity": "auth-service", "count": 2 },
+    { "entity": "notification-service", "count": 1 },
+    { "entity": "cdn-edge", "count": 1 }
+  ],
+  "rootCauseDistribution": [
+    { "category": "Deployment", "count": 12, "percent": 35 },
+    { "category": "Configuration", "count": 7, "percent": 21 },
+    { "category": "Capacity", "count": 6, "percent": 18 },
+    { "category": "Dependency", "count": 5, "percent": 15 },
+    { "category": "Unknown", "count": 4, "percent": 12 }
+  ],
+  "sourceDistribution": [
+    { "source": "NR Alert", "count": 22, "percent": 65 },
+    { "source": "PagerDuty", "count": 7, "percent": 21 },
+    { "source": "ServiceNow", "count": 3, "percent": 9 },
+    { "source": "Manual", "count": 2, "percent": 6 }
+  ],
+  "confidenceCalibration": [
+    { "predicted": 90, "actual": 88, "count": 8 },
+    { "predicted": 80, "actual": 76, "count": 12 },
+    { "predicted": 70, "actual": 65, "count": 6 },
+    { "predicted": 60, "actual": 52, "count": 4 },
+    { "predicted": 50, "actual": 41, "count": 3 },
+    { "predicted": 40, "actual": 30, "count": 2 }
+  ],
+  "teamView": [
+    { "member": "Sarah K.", "investigations": 12, "avgDuration": "19 min", "topAction": "Prioritize" },
+    { "member": "Mike T.", "investigations": 9, "avgDuration": "24 min", "topAction": "Add Context" },
+    { "member": "Priya S.", "investigations": 7, "avgDuration": "28 min", "topAction": "Disagree" },
+    { "member": "Alex R.", "investigations": 4, "avgDuration": "15 min", "topAction": "Skip" },
+    { "member": "Jordan L.", "investigations": 2, "avgDuration": "32 min", "topAction": "Prioritize" }
+  ]
+}

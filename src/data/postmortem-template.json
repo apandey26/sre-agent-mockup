@@ -1,0 +1,105 @@
+{
+  "scenarioA": {
+    "title": "Post-Mortem: checkout-service Latency Incident",
+    "date": "April 9, 2026",
+    "duration": "1h 23m",
+    "severity": "P1",
+    "executiveSummary": "A deployment of checkout-service v2.4.1 introduced an N+1 database query pattern that caused p99 latency to spike from 450ms to 2.3s. The SRE Agent identified the root cause in 20 minutes. The service was rolled back to v2.4.0, resolving the issue within 33 minutes of detection.",
+    "timeline": [
+      { "time": "14:35 UTC", "event": "Alert fired: p99 latency > 2s", "source": "NR Alert" },
+      { "time": "14:36 UTC", "event": "PagerDuty page sent to Sarah K.", "source": "PagerDuty" },
+      { "time": "14:38 UTC", "event": "ServiceNow change detected: CHG0041234", "source": "ServiceNow" },
+      { "time": "14:40 UTC", "event": "SRE Agent: deployment hypothesis at 87%", "source": "Investigation" },
+      { "time": "14:43 UTC", "event": "War room opened, 3 participants", "source": "Zoom" },
+      { "time": "14:55 UTC", "event": "Root cause confirmed: N+1 query in v2.4.1", "source": "Investigation" },
+      { "time": "15:02 UTC", "event": "Rollback initiated to v2.4.0", "source": "ArgoCD" },
+      { "time": "15:08 UTC", "event": "Latency returned to normal", "source": "NR Metrics" },
+      { "time": "15:12 UTC", "event": "Incident resolved", "source": "PagerDuty" },
+      { "time": "15:58 UTC", "event": "All SLO burn rates normalized", "source": "NR SLO" }
+    ],
+    "detection": {
+      "howDetected": "NR Alert condition (p99 > 2s threshold)",
+      "timeToDetect": "0 min (automated)",
+      "timeToAcknowledge": "1 min (PagerDuty)",
+      "timeToRootCause": "20 min (SRE Agent + human confirmation)",
+      "timeToResolve": "33 min (rollback)"
+    },
+    "rootCause": "Deployment v2.4.1 introduced an N+1 query in the checkout flow. The ORM change in commit abc123 removed eager loading for order_items. Under production load (>500 req/s), this caused database query count to increase 47x.",
+    "impact": {
+      "usersAffected": "~12,400 (from RUM data)",
+      "errorBudgetConsumed": "23% of monthly budget",
+      "sloStatus": "99.87% (target: 99.95%), gap of 0.08%",
+      "revenueImpact": "Estimated $18,200 (from Pathpoint)",
+      "customerImpactDuration": "33 minutes",
+      "servicesAffected": ["checkout-service", "payment-gateway (downstream)"]
+    },
+    "resolution": "Rolled back to v2.4.0 via ArgoCD at 15:02 UTC. Latency normalized within 6 minutes. Error rate returned to baseline. SLO burn rate < 1x.",
+    "wentWell": [
+      "SRE Agent identified root cause in 20 minutes",
+      "Rollback was clean and fast (6 min to normalize)",
+      "War room was efficient (3 people, clear roles)"
+    ],
+    "wentWrong": [
+      "N+1 query was not caught in code review",
+      "No load test in staging for this code path",
+      "ORM change review checklist doesn't include eager loading check"
+    ],
+    "actionItems": [
+      { "id": 1, "action": "Add eager loading lint rule to CI", "owner": "Dev Team", "dueDate": "Apr 16", "ticket": null },
+      { "id": 2, "action": "Add load test for checkout flow", "owner": "QA", "dueDate": "Apr 23", "ticket": null },
+      { "id": 3, "action": "Update ORM change review checklist", "owner": "Tech Lead", "dueDate": "Apr 12", "ticket": null },
+      { "id": 4, "action": "Create alert for query count spike", "owner": "SRE", "dueDate": "Apr 11", "ticket": null }
+    ]
+  },
+  "scenarioB": {
+    "title": "Post-Mortem: api-gateway SLO Burn Rate Breach",
+    "date": "April 9, 2026",
+    "duration": "6h 14m",
+    "severity": "P2",
+    "executiveSummary": "An expired TLS certificate on auth-service caused api-gateway to return 502 errors starting at 03:14 UTC. This consumed 62% of the monthly SLO error budget. The SRE Agent identified the root cause within 34 minutes and flagged a matching memory from 90 days ago. Certificate was rotated after a war room was convened.",
+    "timeline": [
+      { "time": "03:14 UTC", "event": "SLO burn rate exceeded 10x", "source": "NR Alert" },
+      { "time": "03:14 UTC", "event": "PagerDuty page sent to Mike T.", "source": "PagerDuty" },
+      { "time": "03:18 UTC", "event": "Mike T. acknowledged page", "source": "PagerDuty" },
+      { "time": "03:42 UTC", "event": "Memory match: INV-0623 (90 days ago, same cert issue)", "source": "Memory" },
+      { "time": "03:48 UTC", "event": "Root cause confirmed: TLS cert expiry", "source": "Investigation" },
+      { "time": "04:00 UTC", "event": "War room opened", "source": "Zoom" },
+      { "time": "06:30 UTC", "event": "Certificate rotated", "source": "K8s" },
+      { "time": "09:28 UTC", "event": "Error rates returned to baseline", "source": "NR Metrics" }
+    ],
+    "detection": {
+      "howDetected": "NR SLO burn rate alert (>10x threshold)",
+      "timeToDetect": "0 min (automated)",
+      "timeToAcknowledge": "4 min (PagerDuty)",
+      "timeToRootCause": "34 min (SRE Agent + memory match + human confirmation)",
+      "timeToResolve": "6h 14m (cert rotation)"
+    },
+    "rootCause": "TLS certificate on auth-service expired at 03:14 UTC after 90-day validity period. Certificate was not auto-rotated. This is the 2nd occurrence in 90 days (previous: INV-0623 on Jan 9).",
+    "impact": {
+      "usersAffected": "~8,200",
+      "errorBudgetConsumed": "62% of monthly budget",
+      "sloStatus": "99.72% (target: 99.9%), gap of 0.18%",
+      "revenueImpact": "Estimated $31,500",
+      "customerImpactDuration": "6h 14m",
+      "servicesAffected": ["api-gateway", "auth-service", "user-service"]
+    },
+    "resolution": "Certificate rotated via manual process (cert-manager was not configured for auto-renewal). Rolling restart of auth-service pods completed at 06:30 UTC.",
+    "wentWell": [
+      "SRE Agent matched memory from 90 days ago, accelerating diagnosis",
+      "War room was organized quickly with clear roles",
+      "Mike T. confirmed cert issue within 30 minutes of page"
+    ],
+    "wentWrong": [
+      "cert-manager auto-renewal was never configured after INV-0623",
+      "No monitoring for certificate expiry dates",
+      "Action items from INV-0623 post-mortem were not completed",
+      "Resolution took 6+ hours due to manual cert process"
+    ],
+    "actionItems": [
+      { "id": 1, "action": "Configure cert-manager for auto-renewal on all services", "owner": "Platform Team", "dueDate": "Apr 16", "ticket": null },
+      { "id": 2, "action": "Add cert expiry monitoring alert (30-day warning)", "owner": "SRE", "dueDate": "Apr 12", "ticket": null },
+      { "id": 3, "action": "Create 60-day cert renewal SLO", "owner": "SRE", "dueDate": "Apr 23", "ticket": null },
+      { "id": 4, "action": "Audit all TLS certs across prod for expiry dates", "owner": "Security", "dueDate": "Apr 14", "ticket": null }
+    ]
+  }
+}

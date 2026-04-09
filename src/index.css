@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Sidebar / Dark chrome */
+  --color-sidebar: #1B2236;
+  --color-sidebar-hover: #232D45;
+  --color-sidebar-active: #2A3654;
+  --color-sidebar-border: #2E3A52;
+
+  /* Canvas / Light content */
+  --color-canvas: #F7F8FA;
+  --color-canvas-card: #FFFFFF;
+
+  /* Brand / Status */
+  --color-nr-blue: #0B6ACB;
+  --color-nr-blue-light: #1A7FE0;
+  --color-good: #00D4A0;
+  --color-bad: #FF4D4D;
+  --color-warning: #F5A623;
+  --color-inconclusive: #F5A623;
+  --color-testing: #0B6ACB;
+
+  /* Text */
+  --color-text-primary: #1D2433;
+  --color-text-secondary: #6B7280;
+  --color-text-sidebar: #8B95A9;
+  --color-text-sidebar-active: #FFFFFF;
+
+  /* Font */
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-scroll::-webkit-scrollbar { width: 4px; }
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--color-sidebar-border); border-radius: 2px; }

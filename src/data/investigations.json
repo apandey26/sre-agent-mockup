@@ -1,0 +1,77 @@
+{
+  "active": [
+    {
+      "id": "inv-0892",
+      "entity": "checkout-service",
+      "environment": "prod",
+      "severity": "P1",
+      "phase": "hypotheses",
+      "trigger": "Latency p99 > 2s threshold violated",
+      "elapsedTime": "12 min",
+      "elapsedMs": 720000,
+      "scenario": "A",
+      "alertSource": "nr",
+      "hypothesisCount": 3,
+      "topHypothesis": "Deployment v2.4.1 regression",
+      "topConfidence": 87,
+      "startedAt": "2026-04-09T14:35:00Z"
+    },
+    {
+      "id": "inv-0893",
+      "entity": "api-gateway",
+      "environment": "prod",
+      "severity": "P2",
+      "phase": "rootCause",
+      "trigger": "Error rate > 5% and SLO burn rate > 10x",
+      "elapsedTime": "6h 14m",
+      "elapsedMs": 22440000,
+      "scenario": "B",
+      "alertSource": "pagerduty",
+      "hypothesisCount": 4,
+      "topHypothesis": "TLS cert expiry on auth-service",
+      "topConfidence": 92,
+      "startedAt": "2026-04-09T03:14:00Z"
+    }
+  ],
+  "recent": [
+    {
+      "id": "inv-0847",
+      "entity": "search-service",
+      "environment": "prod",
+      "severity": "P2",
+      "trigger": "Error rate > 5%",
+      "rootCause": "N+1 query in search",
+      "duration": "18 min",
+      "outcome": "resolved",
+      "confidence": 94,
+      "memoryCreated": true,
+      "resolvedAt": "2026-04-07T11:23:00Z"
+    },
+    {
+      "id": "inv-0831",
+      "entity": "payment-gateway",
+      "environment": "prod",
+      "severity": "P1",
+      "trigger": "Latency p99 > 3s",
+      "rootCause": "DNS resolution failure",
+      "duration": "42 min",
+      "outcome": "resolved",
+      "confidence": 88,
+      "memoryCreated": true,
+      "resolvedAt": "2026-04-02T09:47:00Z"
+    },
+    {
+      "id": "inv-0819",
+      "entity": "inventory-service",
+      "environment": "prod",
+      "severity": "P3",
+      "trigger": "CPU > 90%",
+      "rootCause": "Auto-resolved (batch job)",
+      "duration": "6 min",
+      "outcome": "auto-resolved",
+      "confidence": null,
+      "memoryCreated": false,
+      "resolvedAt": "2026-03-29T02:14:00Z"
+    }
+  ]
+}
