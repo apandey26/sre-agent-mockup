@@ -17,6 +17,7 @@ const ROUTE_LABELS = {
 const INVESTIGATION_NAMES = {
   'inv-0892': 'checkout-service',
   'inv-0893': 'api-gateway',
+  'inv-new': 'payment-gateway',
 }
 
 export default function Breadcrumbs() {

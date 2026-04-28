@@ -1,0 +1,70 @@
+{
+  "server": {
+    "endpoint": "mcp.newrelic.com/v1",
+    "protocol": "MCP over HTTP + SSE",
+    "status": "online",
+    "uptimePercent": 99.97,
+    "version": "2026.04.1",
+    "rateLimitGlobal": "100,000 req/hr",
+    "rateLimitPerConsumer": "10,000 req/hr",
+    "authMethods": ["OAuth 2.0", "API Key (NRAK)"]
+  },
+  "summary": {
+    "connectedConsumers": 6,
+    "requestsMonth": 142000,
+    "toolInvocations": 89400,
+    "p99Latency": 340,
+    "uptimePercent": 99.97,
+    "totalTools": 12
+  },
+  "partners": [
+    { "id": "atlassian-rovo", "name": "Atlassian Rovo", "clientId": "atl-rovo-9f8a2b", "status": "authorized", "scope": "Read-Only", "redirectUrl": "https://rovo.atlassian.com/oauth/callback", "authorizedUsers": "Ops Team (12 users)", "requestsHour": 1860, "rateLimit": 10000, "errorRate": 0.3, "authorizedAt": "2026-03-02", "lastActive": "2 min ago" },
+    { "id": "amazon-quicksuite", "name": "Amazon Quick Suite", "clientId": "aws-qs-4c7d1e", "status": "authorized", "scope": "Read-Only", "redirectUrl": "https://quicksuite.aws.amazon.com/callback", "authorizedUsers": "Cloud Team (8 users)", "requestsHour": 2400, "rateLimit": 10000, "errorRate": 0.1, "authorizedAt": "2026-02-15", "lastActive": "5 min ago" },
+    { "id": "postman", "name": "Postman Flows", "clientId": "pm-flows-2e5f3a", "status": "pending", "scope": "Read-Only", "redirectUrl": "https://flows.postman.com/oauth/nr", "authorizedUsers": "Not yet assigned", "requestsHour": 0, "rateLimit": 5000, "errorRate": 0, "authorizedAt": null, "lastActive": "Never" }
+  ],
+  "localClients": [
+    { "id": "claude-jdoe", "name": "Claude Code", "user": "jdoe@company.com", "authMethod": "OAuth 2.1", "status": "active", "tokenExpiry": "2026-04-23", "requestsHour": 342, "rateLimit": 5000, "lastActive": "Just now", "recentQueries": ["Show top 5 errors in checkout-service", "NRQL: SELECT count(*) FROM Transaction", "What's the SLO status for api-gateway?"] },
+    { "id": "vscode-sarah", "name": "VSCode Copilot", "user": "sarah@company.com", "authMethod": "OAuth 2.1", "status": "active", "tokenExpiry": "2026-04-20", "requestsHour": 128, "rateLimit": 5000, "lastActive": "14 min ago", "recentQueries": ["List recent deployments", "Show alert conditions for payment-gateway"] },
+    { "id": "cursor-mike", "name": "Cursor", "user": "mike@company.com", "authMethod": "API Key", "status": "active", "tokenExpiry": "2026-07-01", "requestsHour": 56, "rateLimit": 5000, "lastActive": "1 hr ago", "recentQueries": ["Get entity relationships for checkout-service"] }
+  ],
+  "auditLog": [
+    { "time": "2 min ago", "user": "jdoe@company.com", "action": "Query_Data", "via": "Claude Code", "tool": "NRQL Query", "status": "Success" },
+    { "time": "5 min ago", "user": "aws-qs-4c7d1e", "action": "Query_Data", "via": "Amazon Quick Suite", "tool": "Entity Lookup", "status": "Success" },
+    { "time": "8 min ago", "user": "sarah@company.com", "action": "Query_Data", "via": "VSCode Copilot", "tool": "Alert Status", "status": "Success" },
+    { "time": "12 min ago", "user": "atl-rovo-9f8a2b", "action": "Query_Data", "via": "Atlassian Rovo", "tool": "NRQL Query", "status": "Success" },
+    { "time": "14 min ago", "user": "jdoe@company.com", "action": "Query_Data", "via": "Claude Code", "tool": "Log Search", "status": "Failed" },
+    { "time": "20 min ago", "user": "mike@company.com", "action": "Query_Data", "via": "Cursor", "tool": "Entity Relationships", "status": "Success" },
+    { "time": "45 min ago", "user": "admin@company.com", "action": "Authorize_Partner", "via": "NR Admin UI", "tool": "—", "status": "Success" }
+  ],
+  "toolSurface": [
+    { "category": "Query & Analytics", "tools": [
+      { "name": "NRQL Query", "description": "Execute NRQL queries against any account", "consumers": 12, "invocationsWeek": 28400 },
+      { "name": "Log Search", "description": "Search and pattern logs across entities", "consumers": 8, "invocationsWeek": 12100 },
+      { "name": "Trace Analysis", "description": "Distributed trace lookup and analysis", "consumers": 3, "invocationsWeek": 4200 }
+    ]},
+    { "category": "Entities & Topology", "tools": [
+      { "name": "Entity Lookup", "description": "Find entities by name, tag, or GUID", "consumers": 11, "invocationsWeek": 18600 },
+      { "name": "Entity Relationships", "description": "Map dependencies and blast radius", "consumers": 4, "invocationsWeek": 3400 },
+      { "name": "Service Map", "description": "Get service dependency graph", "consumers": 2, "invocationsWeek": 1800 }
+    ]},
+    { "category": "Alerts & SLOs", "tools": [
+      { "name": "Alert Status", "description": "Current alert conditions and violations", "consumers": 9, "invocationsWeek": 8900 },
+      { "name": "SLO Status", "description": "SLO compliance, budget, burn rate", "consumers": 6, "invocationsWeek": 5200 },
+      { "name": "Incident Timeline", "description": "Get incident events and timeline", "consumers": 5, "invocationsWeek": 3100 }
+    ]},
+    { "category": "Infrastructure", "tools": [
+      { "name": "K8s Status", "description": "Pod, deployment, event inspection", "consumers": 4, "invocationsWeek": 2800 },
+      { "name": "Deployment Events", "description": "Recent deployments and change events", "consumers": 6, "invocationsWeek": 4100 },
+      { "name": "Host Metrics", "description": "Infrastructure host golden metrics", "consumers": 3, "invocationsWeek": 1900 }
+    ]}
+  ],
+  "usageTrend": [
+    { "week": "Mar 3", "requests": 42000 },
+    { "week": "Mar 10", "requests": 58000 },
+    { "week": "Mar 17", "requests": 71000 },
+    { "week": "Mar 24", "requests": 89000 },
+    { "week": "Mar 31", "requests": 108000 },
+    { "week": "Apr 7", "requests": 128000 },
+    { "week": "Apr 14", "requests": 142000 }
+  ]
+}

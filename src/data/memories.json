@@ -1,251 +1,251 @@
 {
-  "memories": [
+  "sessionContext": {
+    "active": true,
+    "entity": "checkout-service",
+    "investigationId": "inv-0892",
+    "startedAt": "14:35 UTC",
+    "duration": "22 min",
+    "threadId": "a3f8c2d1-9e4b-4f7a-b6c1-8d2e5f0a1b3c",
+    "loaded": {
+      "entityContext": { "status": "done", "fields": 12 },
+      "goldenMetrics": { "status": "done", "points": 60 },
+      "slackMessages": { "status": "done", "count": 5 },
+      "memoryMatches": { "status": "done", "count": 1 },
+      "hypotheses": { "status": "done", "count": 3 }
+    },
+    "summary": "Investigating p99 latency spike on checkout-service. Root cause identified: N+1 query from deployment v2.4.1. Rollback recommended. 12,400 users affected, $18.2K revenue at risk."
+  },
+
+  "userMemories": [
     {
-      "id": "mem-071",
-      "name": "checkout-service: deployment rollback pattern",
-      "category": "Agent Memory/Per-Entity Memories",
-      "type": "auto",
-      "source": "INV-0712",
-      "records": 2197,
-      "size": "14.2 MB",
-      "lastUsed": "2 hours ago",
-      "lastUsedIn": "INV-0892",
-      "confidence": 94,
+      "id": "um-001",
+      "title": "checkout-service: deployment rollback pattern",
+      "content": "When checkout-service latency spikes within 15 min of a deployment, the root cause is almost always the deployment itself. Recommended: rollback first, investigate second.",
+      "category": "investigation_learning",
+      "source": "Auto-extracted from INV-0892",
+      "sourceInvestigation": "INV-0892",
+      "createdAt": "2026-04-09",
       "status": "ACTIVE",
-      "validationCount": 8,
-      "contradictionCount": 0,
-      "content": "When checkout-service latency spikes >2s within 15 min of a deployment, the root cause is almost always the deployment itself. Recommended action: rollback first, investigate second.",
-      "provenance": [
-        { "event": "Created from INV-0712", "date": "2026-02-15", "type": "auto" },
-        { "event": "Validated by INV-0756", "date": "2026-02-28", "type": "auto" },
-        { "event": "Confirmed by Sarah K.", "date": "2026-03-05", "type": "human" },
-        { "event": "Validated by INV-0801", "date": "2026-03-18", "type": "auto" },
-        { "event": "Used in INV-0892", "date": "2026-04-09", "type": "auto" }
-      ]
+      "timesUsed": 4,
+      "confidence": 94,
+      "isCorrection": false,
+      "isBookmark": false,
+      "entity": "checkout-service"
     },
     {
-      "id": "mem-042",
-      "name": "api-gateway: TLS cert expiry pattern",
-      "category": "Agent Memory/Per-Entity Memories",
-      "type": "auto",
-      "source": "INV-0623",
-      "records": 903,
-      "size": "6.8 MB",
-      "lastUsed": "6 hours ago",
-      "lastUsedIn": "INV-0893",
-      "confidence": 94,
+      "id": "um-002",
+      "title": "inventory-service CPU spikes are batch jobs",
+      "content": "Monday 2-3AM UTC CPU spikes on inventory-service are expected batch processing. NOT an incident. Agent should suppress alerts during this window.",
+      "category": "correction",
+      "source": "You disagreed with agent on INV-0819",
+      "sourceInvestigation": "INV-0819",
+      "createdAt": "2026-03-29",
       "status": "ACTIVE",
-      "validationCount": 2,
-      "contradictionCount": 0,
-      "content": "api-gateway errors spike when auth-service TLS cert expires (90-day cycle). Check cert validity first. Runbook RB-042 has rotation steps. Consider automating cert-manager.",
-      "provenance": [
-        { "event": "Created from INV-0623", "date": "2026-01-09", "type": "auto" },
-        { "event": "Validated by INV-0893", "date": "2026-04-09", "type": "auto" },
-        { "event": "Mike T. added note: 'automate cert-manager'", "date": "2026-04-09", "type": "human" }
-      ]
-    },
-    {
-      "id": "mem-088",
-      "name": "Monday batch job CPU noise",
-      "category": "Team Context/Environment Docs/Known Noise Patterns",
-      "type": "human",
-      "source": "Manual",
-      "records": 56,
-      "size": "0.4 MB",
-      "lastUsed": "5 days ago",
-      "lastUsedIn": "INV-0878",
+      "timesUsed": 3,
       "confidence": 100,
-      "status": "ACTIVE",
-      "validationCount": 12,
-      "contradictionCount": 0,
-      "content": "Every Monday 2-3 AM UTC: batch job causes CPU spike on inventory-service. NOT an incident. Suppress alerts during this window.",
-      "provenance": [
-        { "event": "Manually created by ops team", "date": "2026-01-22", "type": "human" }
-      ]
+      "isCorrection": true,
+      "isBookmark": false,
+      "entity": "inventory-service"
     },
     {
-      "id": "mem-095",
-      "name": "payment-gateway: DNS resolution flakiness",
-      "category": "Agent Memory/Per-Condition Memories",
-      "type": "auto",
-      "source": "INV-0831",
-      "records": 719,
-      "size": "5.1 MB",
-      "lastUsed": "7 days ago",
-      "lastUsedIn": "INV-0831",
-      "confidence": 88,
-      "status": "ACTIVE",
-      "validationCount": 3,
-      "contradictionCount": 0,
-      "content": "payment-gateway DNS resolution failures correlate with Route53 TTL changes. Check recent DNS config changes in ServiceNow first.",
-      "provenance": [
-        { "event": "Created from INV-0831", "date": "2026-04-02", "type": "auto" }
-      ]
-    },
-    {
-      "id": "mem-101",
-      "name": "search-service: N+1 query pattern",
-      "category": "Agent Memory/Per-Entity Memories",
-      "type": "auto",
-      "source": "INV-0847",
-      "records": 174,
-      "size": "1.2 MB",
-      "lastUsed": "2 days ago",
-      "lastUsedIn": "INV-0847",
-      "confidence": 78,
+      "id": "um-003",
+      "title": "payment-gateway: Redis pool monitoring needed",
+      "content": "Redis connections can hit pool max (200) without any alert. Need to add connection pool monitoring alert at warn=150, crit=190.",
+      "category": "investigation_learning",
+      "source": "Auto-extracted from INV-new",
+      "sourceInvestigation": "INV-new",
+      "createdAt": "2026-04-09",
       "status": "PENDING",
-      "validationCount": 1,
-      "contradictionCount": 0,
-      "content": "search-service ORM changes that remove select_related() calls cause N+1 query patterns under load. Check recent commits for ORM changes.",
-      "provenance": [
-        { "event": "Created from INV-0847", "date": "2026-04-07", "type": "auto" }
-      ]
+      "timesUsed": 0,
+      "confidence": 78,
+      "isCorrection": false,
+      "isBookmark": false,
+      "entity": "payment-gateway"
     },
     {
-      "id": "mem-110",
-      "name": "Black Friday traffic pattern",
-      "category": "Team Context/Environment Docs/Seasonal Patterns",
-      "type": "human",
-      "source": "Manual",
-      "records": 36,
-      "size": "0.2 MB",
-      "lastUsed": "142 days ago",
-      "lastUsedIn": null,
+      "id": "um-004",
+      "title": "api-gateway: cert expiry pattern (90-day cycle)",
+      "content": "When api-gateway shows 5xx spike without recent deployments, check TLS cert validity first. auth-service certs are on 90-day rotation and have failed twice.",
+      "category": "investigation_learning",
+      "source": "Auto-extracted from INV-0893",
+      "sourceInvestigation": "INV-0893",
+      "createdAt": "2026-04-09",
+      "status": "ACTIVE",
+      "timesUsed": 1,
+      "confidence": 94,
+      "isCorrection": false,
+      "isBookmark": false,
+      "entity": "api-gateway"
+    },
+    {
+      "id": "um-005",
+      "title": "search-service: N+1 query detection shortcut",
+      "content": "When search-service latency spikes, check database query count first. If >500 queries/min, it's likely an N+1 pattern from an ORM change.",
+      "category": "investigation_learning",
+      "source": "Auto-extracted from INV-0847",
+      "sourceInvestigation": "INV-0847",
+      "createdAt": "2026-04-07",
+      "status": "ACTIVE",
+      "timesUsed": 2,
+      "confidence": 88,
+      "isCorrection": false,
+      "isBookmark": false,
+      "entity": "search-service"
+    },
+    {
+      "id": "um-006",
+      "title": "Bookmark: ArgoCD rollback command reference",
+      "content": "argocd app rollback <app-name> --to <revision>. Always verify pods healthy after rollback with: kubectl get pods -n production -l app=<name>",
+      "category": "bookmark",
+      "source": "Manually saved",
+      "sourceInvestigation": null,
+      "createdAt": "2026-03-15",
+      "status": "ACTIVE",
+      "timesUsed": 6,
       "confidence": 100,
+      "isCorrection": false,
+      "isBookmark": true,
+      "entity": null
+    },
+    {
+      "id": "um-007",
+      "title": "payment-gateway: DNS resolution flakiness",
+      "content": "payment-gateway DNS failures correlate with Route53 TTL changes. Check ServiceNow for recent DNS config changes first.",
+      "category": "investigation_learning",
+      "source": "Auto-extracted from INV-0831",
+      "sourceInvestigation": "INV-0831",
+      "createdAt": "2026-04-02",
       "status": "STALE",
-      "validationCount": 1,
-      "contradictionCount": 0,
-      "content": "Black Friday: expect 10x normal traffic. Adjusted thresholds in alert config. Do NOT scale down, flash sales possible.",
-      "provenance": [
-        { "event": "Manually created by SRE team", "date": "2025-11-20", "type": "human" }
-      ]
-    },
-    {
-      "id": "mem-115",
-      "name": "redis-cache eviction threshold",
-      "category": "Agent Memory/Cross-Incident Patterns",
-      "type": "auto",
-      "source": "ML-detected",
-      "records": 48,
-      "size": "0.3 MB",
-      "lastUsed": "21 days ago",
-      "lastUsedIn": "INV-0812",
+      "timesUsed": 1,
       "confidence": 72,
-      "status": "REVIEW",
-      "validationCount": 2,
-      "contradictionCount": 2,
-      "content": "When redis-cache eviction rate exceeds 500/min, downstream services experience latency spikes within 5 minutes. However, recent Redis 7.2 upgrade may have changed this threshold.",
-      "provenance": [
-        { "event": "ML-detected pattern across 4 investigations", "date": "2026-03-01", "type": "auto" },
-        { "event": "Contradicted by INV-0820 (no impact at 600/min)", "date": "2026-03-22", "type": "auto" },
-        { "event": "Flagged for review: Redis 7.2 upgrade may change behavior", "date": "2026-03-25", "type": "auto" }
-      ]
-    },
-    {
-      "id": "mem-120",
-      "name": "checkout-service architecture",
-      "category": "Platform Knowledge/AI Context/Service Catalog",
-      "type": "synced",
-      "source": "NR Service Catalog",
-      "records": 15,
-      "size": "0.1 MB",
-      "lastUsed": "2 hours ago",
-      "lastUsedIn": "INV-0892",
-      "confidence": 100,
-      "status": "ACTIVE",
-      "validationCount": 0,
-      "contradictionCount": 0,
-      "content": "checkout-service: EKS, 3-12 replicas (HPA), depends on payment-gateway, inventory-service, redis-cache. Aurora PostgreSQL (us-east-1 primary, us-west-2 replica).",
-      "provenance": [
-        { "event": "Auto-synced from NR Service Catalog", "date": "2026-04-09", "type": "sync" }
-      ]
-    },
-    {
-      "id": "mem-125",
-      "name": "Escalation policy: checkout-team",
-      "category": "Team Context/Escalation Policies",
-      "type": "synced",
-      "source": "PagerDuty",
-      "records": 3,
-      "size": "0.05 MB",
-      "lastUsed": "2 hours ago",
-      "lastUsedIn": "INV-0892",
-      "confidence": 100,
-      "status": "ACTIVE",
-      "validationCount": 0,
-      "contradictionCount": 0,
-      "content": "P1: Page checkout-team-oncall + #checkout-incidents Slack + VP Eng if >30 min. P2: Page oncall + Slack. P3: Jira ticket, next sprint.",
-      "provenance": [
-        { "event": "Auto-synced from PagerDuty", "date": "2026-04-09", "type": "sync" }
-      ]
-    },
-    {
-      "id": "mem-130",
-      "name": "Runbook: deployment rollback",
-      "category": "Team Context/Runbooks",
-      "type": "synced",
-      "source": "Confluence",
-      "records": 1,
-      "size": "0.8 MB",
-      "lastUsed": "12 days ago",
-      "lastUsedIn": "INV-0847",
-      "confidence": 100,
-      "status": "ACTIVE",
-      "validationCount": 4,
-      "contradictionCount": 0,
-      "content": "Steps: 1) Identify target version in ArgoCD, 2) Run argocd app rollback, 3) Verify pods healthy, 4) Confirm metrics normalized, 5) Notify team.",
-      "provenance": [
-        { "event": "Synced from Confluence space ENG", "date": "2026-03-01", "type": "sync" }
-      ]
-    },
-    {
-      "id": "mem-135",
-      "name": "Runbook: TLS cert rotation",
-      "category": "Team Context/Runbooks",
-      "type": "synced",
-      "source": "Confluence",
-      "records": 1,
-      "size": "0.6 MB",
-      "lastUsed": "6 hours ago",
-      "lastUsedIn": "INV-0893",
-      "confidence": 100,
-      "status": "ACTIVE",
-      "validationCount": 2,
-      "contradictionCount": 0,
-      "content": "Steps: 1) Generate new cert via cert-manager or manual openssl, 2) Update K8s secret, 3) Rolling restart of pods, 4) Verify TLS handshake, 5) Update monitoring for next expiry.",
-      "provenance": [
-        { "event": "Synced from Confluence space ENG", "date": "2026-02-01", "type": "sync" }
-      ]
-    },
-    {
-      "id": "mem-140",
-      "name": "End-of-month payment volume",
-      "category": "Team Context/Environment Docs/Seasonal Patterns",
-      "type": "human",
-      "source": "Manual",
-      "records": 12,
-      "size": "0.1 MB",
-      "lastUsed": "9 days ago",
-      "lastUsedIn": "INV-0865",
-      "confidence": 95,
-      "status": "ACTIVE",
-      "validationCount": 6,
-      "contradictionCount": 0,
-      "content": "End of month: 3x payment processing volume (subscription renewals). Holiday weekends: 40% traffic reduction, do NOT scale down, flash sales possible.",
-      "provenance": [
-        { "event": "Manually created by checkout team lead", "date": "2025-12-01", "type": "human" }
-      ]
+      "isCorrection": false,
+      "isBookmark": false,
+      "entity": "payment-gateway"
     }
   ],
+
+  "userPreferences": [
+    { "id": "pref-001", "key": "outputFormat", "label": "Output Format", "description": "How should the agent format data?", "options": ["Table", "JSON", "Markdown", "Auto"], "value": "Auto" },
+    { "id": "pref-002", "key": "nrqlStyle", "label": "NRQL Style", "description": "How should queries be formatted?", "options": ["Compact", "Formatted with aliases"], "value": "Formatted with aliases" },
+    { "id": "pref-003", "key": "chartPreference", "label": "Chart Preference", "description": "Preferred visualization type", "options": ["Line", "Bar", "Area", "Auto"], "value": "Auto" },
+    { "id": "pref-004", "key": "envFilter", "label": "Environment Filter", "description": "Default environments to exclude from queries", "type": "chips", "value": ["load-test", "sandbox"] },
+    { "id": "pref-005", "key": "verbosity", "label": "Verbosity", "description": "How detailed should agent responses be?", "options": ["Brief", "Standard", "Detailed"], "value": "Standard" },
+    { "id": "pref-006", "key": "timezone", "label": "Timezone", "description": "Display times in your local timezone?", "options": ["UTC", "Local"], "value": "Local" }
+  ],
+
+  "orgMemories": {
+    "approved": [
+      {
+        "id": "org-001",
+        "title": "Billing DB spikes at 2 AM PST on Sundays",
+        "content": "The billing database always spikes to 90% CPU at 2 AM PST on Sundays due to a scheduled batch job. Ignore it.",
+        "domain": "entity_quirks",
+        "entity": "billing-db",
+        "submittedBy": "Sarah K.",
+        "approvedBy": "Mike T. (Org Manager)",
+        "approvedAt": "2026-03-01",
+        "corroborationCount": 5,
+        "status": "APPROVED"
+      },
+      {
+        "id": "org-002",
+        "title": "Redis clusters named cache-prd-*, not redis-prd-*",
+        "content": "Production Redis clusters are named cache-prd-*, not redis-prd-*. All monitoring queries must use the cache-prd prefix.",
+        "domain": "naming_conventions",
+        "entity": null,
+        "submittedBy": "Alex R.",
+        "approvedBy": "Mike T. (Org Manager)",
+        "approvedAt": "2026-02-15",
+        "corroborationCount": 3,
+        "status": "APPROVED"
+      },
+      {
+        "id": "org-003",
+        "title": "checkout-service: always page #sre-checkout-crit for P1",
+        "content": "Any critical alert tied to checkout-service must automatically page the #sre-checkout-crit Slack channel. VP Eng escalation if >30 min.",
+        "domain": "execution_plans",
+        "entity": "checkout-service",
+        "submittedBy": "Priya S.",
+        "approvedBy": "Mike T. (Org Manager)",
+        "approvedAt": "2026-01-20",
+        "corroborationCount": 8,
+        "status": "APPROVED"
+      },
+      {
+        "id": "org-004",
+        "title": "Exclude load-test and sandbox from NRQL queries",
+        "content": "Whenever querying APM transaction times, always exclude the load-test and sandbox environments using WHERE environment NOT IN ('load-test', 'sandbox').",
+        "domain": "entity_quirks",
+        "entity": null,
+        "submittedBy": "Jordan L.",
+        "approvedBy": "Sarah K. (Org Manager)",
+        "approvedAt": "2026-03-10",
+        "corroborationCount": 12,
+        "status": "APPROVED"
+      },
+      {
+        "id": "org-005",
+        "title": "auth-service: restart pods for memory leak, never rollback DB",
+        "content": "If auth-service starts throwing memory leak errors, the SOP is to restart the pods. Do not rollback the database schema.",
+        "domain": "execution_plans",
+        "entity": "auth-service",
+        "submittedBy": "Mike T.",
+        "approvedBy": "Mike T. (Org Manager)",
+        "approvedAt": "2026-02-28",
+        "corroborationCount": 4,
+        "status": "APPROVED"
+      },
+      {
+        "id": "org-006",
+        "title": "Synthetic pings from AP-South timeout due to VPN",
+        "content": "Synthetic ping checks from the AP-South region frequently timeout due to our VPN flakiness, not application downtime. Filter out AP-South for uptime calculations.",
+        "domain": "noise_patterns",
+        "entity": null,
+        "submittedBy": "Priya S.",
+        "approvedBy": "Mike T. (Org Manager)",
+        "approvedAt": "2026-03-05",
+        "corroborationCount": 6,
+        "status": "APPROVED"
+      }
+    ],
+    "pending": [
+      {
+        "id": "org-pend-001",
+        "title": "payment-gateway: Redis connection leak in v3.1.x",
+        "content": "payment-gateway versions 3.1.x have a connection leak when payment processing times out. Connections are opened but not released.",
+        "domain": "entity_quirks",
+        "entity": "payment-gateway",
+        "submittedBy": "Abhishek P.",
+        "submittedAt": "2026-04-09",
+        "corroborationCount": 1,
+        "similarExisting": null,
+        "status": "PENDING_APPROVAL"
+      },
+      {
+        "id": "org-pend-002",
+        "title": "api-gateway: automate cert-manager for TLS rotation",
+        "content": "auth-service TLS certs expire every 90 days and have caused 2 incidents. cert-manager should be configured for auto-renewal.",
+        "domain": "execution_plans",
+        "entity": "api-gateway",
+        "submittedBy": "Mike T.",
+        "submittedAt": "2026-04-09",
+        "corroborationCount": 2,
+        "similarExisting": "org-005",
+        "status": "PENDING_APPROVAL"
+      }
+    ]
+  },
+
   "stats": {
-    "totalMemories": 12,
-    "activeCount": 9,
+    "userMemoryCount": 7,
+    "activeCount": 5,
     "pendingCount": 1,
     "staleCount": 1,
-    "reviewCount": 1,
-    "totalRecords": 4163,
-    "totalSize": "29.85 MB"
+    "orgApprovedCount": 6,
+    "orgPendingCount": 2,
+    "preferencesCount": 6
   },
+
   "navTree": [
     {
       "name": "Platform Knowledge",
@@ -258,14 +258,6 @@
         { "name": "Maps & Topology", "children": [
           { "name": "Maps context", "count": 3 },
           { "name": "Daily logs", "count": 174 }
-        ]},
-        { "name": "Source Code Context", "children": [
-          { "name": "Git Repos", "count": 12 },
-          { "name": "CODEOWNERS", "count": 8 }
-        ]},
-        { "name": "Network & Infrastructure", "children": [
-          { "name": "VPC topology", "count": 4 },
-          { "name": "Security Groups", "count": 18 }
         ]}
       ]
     },
@@ -274,8 +266,7 @@
       "children": [
         { "name": "Per-Entity Memories", "count": 56 },
         { "name": "Per-Condition Memories", "count": 23 },
-        { "name": "Cross-Incident Patterns", "count": 8 },
-        { "name": "Human Corrections", "count": 5 }
+        { "name": "Cross-Incident Patterns", "count": 8 }
       ]
     },
     {
@@ -283,13 +274,7 @@
       "children": [
         { "name": "Runbooks", "count": 48 },
         { "name": "Escalation Policies", "count": 6 },
-        { "name": "Environment Docs", "children": [
-          { "name": "Known Noise Patterns", "count": 12 },
-          { "name": "Seasonal Patterns", "count": 8 },
-          { "name": "Architecture Decisions", "count": 15 }
-        ]},
-        { "name": "Slack Thread Archive", "count": 354 },
-        { "name": "Zoom Transcript Archive", "count": 12 }
+        { "name": "Environment Docs", "count": 35 }
       ]
     }
   ]

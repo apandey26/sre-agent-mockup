@@ -1,0 +1,90 @@
+{
+  "entities": [
+    {
+      "name": "checkout-service",
+      "type": "APM",
+      "team": "checkout-team",
+      "deployFrequency": "Tue/Thu, avg 2.3 deploys/week",
+      "latencyBaseline": { "p50": 120, "p95": 340, "p99": 450 },
+      "errorBaseline": 0.02,
+      "incidentHistory": { "count": 3, "last90Days": true, "topCause": "Deployment regression", "topCausePercent": 67 },
+      "dependencies": ["order-db", "redis-cache", "payment-gateway"],
+      "learnedPatterns": [
+        { "pattern": "Latency spikes within 15 min of deploy are almost always the deploy", "confidence": 94, "source": "3 incidents" },
+        { "pattern": "Monday 2-3 AM CPU spikes are batch jobs, not incidents", "confidence": 100, "source": "User correction" }
+      ],
+      "modelAge": "94 days",
+      "lastUpdated": "2026-04-09"
+    },
+    {
+      "name": "api-gateway",
+      "type": "APM",
+      "team": "platform-team",
+      "deployFrequency": "Weekly, avg 1.1 deploys/week",
+      "latencyBaseline": { "p50": 45, "p95": 150, "p99": 220 },
+      "errorBaseline": 0.1,
+      "incidentHistory": { "count": 2, "last90Days": true, "topCause": "Certificate expiry", "topCausePercent": 100 },
+      "dependencies": ["auth-service", "user-service", "search-service"],
+      "learnedPatterns": [
+        { "pattern": "TLS cert expires every 90 days — no auto-renewal configured", "confidence": 99, "source": "2 identical incidents" },
+        { "pattern": "502 errors are always TLS-related, never upstream", "confidence": 97, "source": "Log correlation" }
+      ],
+      "modelAge": "187 days",
+      "lastUpdated": "2026-04-09"
+    },
+    {
+      "name": "payment-gateway",
+      "type": "APM",
+      "team": "payments-team",
+      "deployFrequency": "Mon/Wed/Fri, avg 3.0 deploys/week",
+      "latencyBaseline": { "p50": 80, "p95": 150, "p99": 180 },
+      "errorBaseline": 0.05,
+      "incidentHistory": { "count": 2, "last90Days": true, "topCause": "Resource exhaustion", "topCausePercent": 50 },
+      "dependencies": ["redis-cache", "order-db", "notification-svc"],
+      "learnedPatterns": [
+        { "pattern": "Redis connection pool saturates under sustained load after v3.x deploys", "confidence": 78, "source": "1 incident + code analysis" },
+        { "pattern": "Health check depends on Redis — pool exhaustion cascades to pod restarts", "confidence": 85, "source": "K8s event correlation" }
+      ],
+      "modelAge": "62 days",
+      "lastUpdated": "2026-04-09"
+    },
+    {
+      "name": "search-service",
+      "type": "APM",
+      "team": "search-team",
+      "deployFrequency": "Biweekly, avg 0.5 deploys/week",
+      "latencyBaseline": { "p50": 25, "p95": 40, "p99": 45 },
+      "errorBaseline": 0.01,
+      "incidentHistory": { "count": 1, "last90Days": true, "topCause": "N+1 query", "topCausePercent": 100 },
+      "dependencies": ["order-db"],
+      "learnedPatterns": [
+        { "pattern": "ORM changes frequently introduce N+1 queries", "confidence": 94, "source": "1 incident" }
+      ],
+      "modelAge": "45 days",
+      "lastUpdated": "2026-04-07"
+    },
+    {
+      "name": "redis-cache",
+      "type": "INFRA",
+      "team": "platform-team",
+      "deployFrequency": "Rare, config changes only",
+      "latencyBaseline": { "p50": 1, "p95": 3, "p99": 4 },
+      "errorBaseline": 0,
+      "incidentHistory": { "count": 1, "last90Days": true, "topCause": "Connection pool exhaustion", "topCausePercent": 100 },
+      "dependencies": [],
+      "learnedPatterns": [
+        { "pattern": "Pool max is 200 connections — saturation causes cascade failures in consumers", "confidence": 96, "source": "Metric analysis" }
+      ],
+      "modelAge": "120 days",
+      "lastUpdated": "2026-04-09"
+    }
+  ],
+  "fleetSummary": {
+    "totalEntities": 10,
+    "entitiesWithModel": 5,
+    "avgModelAge": "102 days",
+    "totalPatterns": 9,
+    "patternsUsedInInvestigations": 6,
+    "retentionValue": "Getting smarter with every investigation — 9 patterns learned from 8 incidents"
+  }
+}

@@ -6,8 +6,8 @@
       "environment": "prod",
       "severity": "P1",
       "phase": "hypotheses",
-      "trigger": "Latency p99 > 2s threshold violated",
-      "elapsedTime": "12 min",
+      "trigger": "Response time p99 > 3s for 5 minutes (Policy: Services - APM)",
+      "elapsedTime": "24 min",
       "elapsedMs": 720000,
       "scenario": "A",
       "alertSource": "nr",
@@ -31,6 +31,22 @@
       "topHypothesis": "TLS cert expiry on auth-service",
       "topConfidence": 92,
       "startedAt": "2026-04-09T03:14:00Z"
+    },
+    {
+      "id": "inv-new",
+      "entity": "payment-gateway",
+      "environment": "prod",
+      "severity": "P2",
+      "phase": "hypotheses",
+      "trigger": "Latency p99 > 2s, pod restarts detected",
+      "elapsedTime": "22 min",
+      "elapsedMs": 1320000,
+      "scenario": "C",
+      "alertSource": "nr",
+      "hypothesisCount": 2,
+      "topHypothesis": "Redis connection pool exhaustion",
+      "topConfidence": 78,
+      "startedAt": "2026-04-09T14:13:00Z"
     }
   ],
   "recent": [

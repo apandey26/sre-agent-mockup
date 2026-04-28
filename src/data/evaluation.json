@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "overallScore": 84,
+    "totalRuns": 142,
+    "passRate": 78,
+    "avgConfidence": 82,
+    "lastRunAt": "2026-04-09T14:00:00Z"
+  },
+  "skillScores": [
+    { "skill": "Cert/TLS analysis", "score": 96, "runs": 8, "trend": [88, 90, 92, 94, 96, 96], "passRate": 100 },
+    { "skill": "Deployment diff", "score": 94, "runs": 22, "trend": [82, 85, 88, 90, 92, 94], "passRate": 91 },
+    { "skill": "Metric correlation", "score": 92, "runs": 34, "trend": [78, 82, 85, 88, 90, 92], "passRate": 88 },
+    { "skill": "NRQL query builder", "score": 90, "runs": 34, "trend": [80, 83, 86, 88, 89, 90], "passRate": 85 },
+    { "skill": "Log analysis", "score": 87, "runs": 28, "trend": [75, 78, 80, 83, 85, 87], "passRate": 82 },
+    { "skill": "K8s diagnostics", "score": 81, "runs": 19, "trend": [70, 72, 75, 78, 80, 81], "passRate": 74 },
+    { "skill": "Topology analysis", "score": 72, "runs": 5, "trend": [60, 65, 68, 70, 72, 72], "passRate": 60 },
+    { "skill": "Cost analysis", "score": 68, "runs": 3, "trend": [55, 60, 65, 68, 68, 68], "passRate": 50 }
+  ],
+  "agentScores": [
+    { "agent": "O11y Agent", "score": 89, "runs": 34, "trend": [78, 82, 84, 86, 88, 89] },
+    { "agent": "K8s Agent", "score": 83, "runs": 22, "trend": [72, 75, 78, 80, 82, 83] },
+    { "agent": "Security Agent", "score": 91, "runs": 8, "trend": [85, 87, 89, 90, 91, 91] }
+  ],
+  "useCases": [
+    { "name": "Deployment regression detection", "skill": "Deployment diff", "status": "pass", "lastScore": 96, "lastRun": "Apr 9" },
+    { "name": "N+1 query identification", "skill": "Log analysis", "status": "pass", "lastScore": 91, "lastRun": "Apr 9" },
+    { "name": "Certificate expiry detection", "skill": "Cert/TLS analysis", "status": "pass", "lastScore": 99, "lastRun": "Apr 9" },
+    { "name": "SLO burn rate calculation", "skill": "Metric correlation", "status": "pass", "lastScore": 94, "lastRun": "Apr 8" },
+    { "name": "Pod crash loop diagnosis", "skill": "K8s diagnostics", "status": "pass", "lastScore": 85, "lastRun": "Apr 8" },
+    { "name": "Redis pool exhaustion", "skill": "Metric correlation", "status": "pass", "lastScore": 88, "lastRun": "Apr 9" },
+    { "name": "DNS resolution failure", "skill": "Topology analysis", "status": "fail", "lastScore": 62, "lastRun": "Apr 7" },
+    { "name": "Memory leak detection", "skill": "Metric correlation", "status": "pass", "lastScore": 79, "lastRun": "Apr 6" },
+    { "name": "Config drift detection", "skill": "K8s diagnostics", "status": "fail", "lastScore": 55, "lastRun": "Apr 5" },
+    { "name": "Noisy alert suppression", "skill": "Log analysis", "status": "pass", "lastScore": 82, "lastRun": "Apr 7" }
+  ],
+  "confidenceCalibration": [
+    { "bucket": "0-20%", "predicted": 10, "actual": 8 },
+    { "bucket": "20-40%", "predicted": 30, "actual": 25 },
+    { "bucket": "40-60%", "predicted": 50, "actual": 48 },
+    { "bucket": "60-80%", "predicted": 70, "actual": 72 },
+    { "bucket": "80-100%", "predicted": 90, "actual": 88 }
+  ],
+  "weeklyTrend": [
+    { "week": "Mar 10", "score": 72 },
+    { "week": "Mar 17", "score": 75 },
+    { "week": "Mar 24", "score": 78 },
+    { "week": "Mar 31", "score": 80 },
+    { "week": "Apr 7", "score": 84 }
+  ]
+}

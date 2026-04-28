@@ -1,0 +1,57 @@
+{
+  "builtIn": [
+    { "id": "metric-correlation", "name": "Metric correlation", "icon": "BarChart3", "description": "Correlates golden metric anomalies with timeline events", "enabled": true, "performance": 92, "invocations": 34 },
+    { "id": "log-analysis", "name": "Log analysis", "icon": "FileText", "description": "Searches and patterns logs for error signatures", "enabled": true, "performance": 87, "invocations": 28 },
+    { "id": "deployment-diff", "name": "Deployment diff", "icon": "GitBranch", "description": "Analyzes recent deployments for code changes correlated with issues", "enabled": true, "performance": 94, "invocations": 22 },
+    { "id": "k8s-diagnostics", "name": "K8s diagnostics", "icon": "Box", "description": "Inspects pod status, events, HPA, resource limits", "enabled": true, "performance": 81, "invocations": 19 },
+    { "id": "cert-tls-analysis", "name": "Cert/TLS analysis", "icon": "Shield", "description": "Checks certificate expiry, TLS handshake health", "enabled": true, "performance": 96, "invocations": 8 },
+    { "id": "nrql-builder", "name": "NRQL query builder", "icon": "Search", "description": "Generates diagnostic NRQL queries from investigation context", "enabled": true, "performance": 90, "invocations": 34 },
+    { "id": "topology-analysis", "name": "Topology analysis", "icon": "Network", "description": "Maps service dependencies and blast radius", "enabled": false, "performance": 72, "invocations": 5 },
+    { "id": "cost-analysis", "name": "Cost analysis", "icon": "DollarSign", "description": "Estimates revenue impact and infrastructure cost changes", "enabled": false, "performance": 68, "invocations": 3 }
+  ],
+  "subAgents": [
+    { "id": "o11y-agent", "name": "O11y Agent", "description": "Analyzes golden metrics, anomalies, SLO impact", "enabled": true, "icon": "Activity" },
+    { "id": "k8s-agent", "name": "K8s Agent", "description": "Inspects deployments, pods, events, HPA", "enabled": true, "icon": "Box" },
+    { "id": "security-agent", "name": "Security Agent", "description": "Checks for CVEs, cert issues, auth failures", "enabled": false, "icon": "ShieldAlert" }
+  ],
+  "investigationSkills": {
+    "inv-0892": {
+      "skills": [
+        { "skillId": "deployment-diff", "name": "Deployment diff", "status": "completed", "finding": "PR #1847 removed eager loading in order_items.rb", "confidence": 95 },
+        { "skillId": "metric-correlation", "name": "Metric correlation", "status": "completed", "finding": "Latency 5.1x spike correlates with deploy at 14:32 UTC", "confidence": 92 },
+        { "skillId": "log-analysis", "name": "Log analysis", "status": "completed", "finding": "847 N+1 query errors detected in 15 min window", "confidence": 88 },
+        { "skillId": "k8s-diagnostics", "name": "K8s diagnostics", "status": "completed", "finding": "Pods healthy, no OOMKills, deploy via ArgoCD at 14:11", "confidence": 75 },
+        { "skillId": "nrql-builder", "name": "NRQL query builder", "status": "completed", "finding": "Generated 4 diagnostic queries across Transaction and Metric", "confidence": 90 }
+      ],
+      "subAgents": [
+        { "agentId": "o11y-agent", "name": "O11y Agent", "status": "completed", "summary": "Analyzed 6 golden metrics, identified anomaly window 14:32-14:47" },
+        { "agentId": "k8s-agent", "name": "K8s Agent", "status": "completed", "summary": "Checked 3 recent deployments, flagged v2.4.1 as correlated" }
+      ]
+    },
+    "inv-0893": {
+      "skills": [
+        { "skillId": "cert-tls-analysis", "name": "Cert/TLS analysis", "status": "completed", "finding": "auth-service TLS cert expired at 03:14 UTC, 90-day cycle", "confidence": 99 },
+        { "skillId": "metric-correlation", "name": "Metric correlation", "status": "completed", "finding": "502 errors exactly match cert expiry timestamp", "confidence": 97 },
+        { "skillId": "log-analysis", "name": "Log analysis", "status": "completed", "finding": "2,100 TLS handshake failures in 30 min", "confidence": 94 },
+        { "skillId": "nrql-builder", "name": "NRQL query builder", "status": "completed", "finding": "Generated cert expiry monitoring queries", "confidence": 85 }
+      ],
+      "subAgents": [
+        { "agentId": "o11y-agent", "name": "O11y Agent", "status": "completed", "summary": "12% error rate spike, all 502s, TLS handshake origin" },
+        { "agentId": "security-agent", "name": "Security Agent", "status": "completed", "summary": "Cert expired, no auto-renewal configured, matches INV-0623 pattern" }
+      ]
+    },
+    "inv-new": {
+      "skills": [
+        { "skillId": "metric-correlation", "name": "Metric correlation", "status": "completed", "finding": "Redis connections hit 200/200 pool max, latency 23x spike", "confidence": 96 },
+        { "skillId": "log-analysis", "name": "Log analysis", "status": "completed", "finding": "1,200 timeout errors, 'Redis pool exhausted' pattern", "confidence": 91 },
+        { "skillId": "k8s-diagnostics", "name": "K8s diagnostics", "status": "completed", "finding": "6 pod restarts due to health check timeout on /health", "confidence": 85 },
+        { "skillId": "deployment-diff", "name": "Deployment diff", "status": "completed", "finding": "v3.1.2 changed timeout handler, connection release path missing", "confidence": 93 },
+        { "skillId": "nrql-builder", "name": "NRQL query builder", "status": "completed", "finding": "Generated Redis pool saturation and pod restart queries", "confidence": 88 }
+      ],
+      "subAgents": [
+        { "agentId": "o11y-agent", "name": "O11y Agent", "status": "completed", "summary": "Connection pool saturation → latency → health check failure chain" },
+        { "agentId": "k8s-agent", "name": "K8s Agent", "status": "completed", "summary": "6 restarts in 15 min, CrashLoopBackOff on 2 pods" }
+      ]
+    }
+  }
+}
